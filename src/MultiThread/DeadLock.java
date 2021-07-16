@@ -12,7 +12,7 @@ public class DeadLock {
         Thread thread = new Thread(() -> {
             runner.fistThread();
         });
-        Thread thread2 = new Thread(() ->{
+        Thread thread2 = new Thread(() -> {
             runner.secondThread();
         });
 
@@ -36,47 +36,53 @@ public class DeadLock {
 
         Random random = new Random();
 
-         public void fistThread() {
+        public void fistThread() {
 
-             for (int i = 0; i < 10000; i++) {
-                 lock1.lock();
-                 lock2.lock();
-                         Account.transfer(account1, account2, random.nextInt(100));
-                         lock1.unlock();
-                         lock2.unlock();
-                     }
-                 }
+            for (int i = 0; i < 10000; i++) {
+                lock1.lock();
+                lock2.lock();
+                Account.transfer(account1, account2, random.nextInt(100));
+                lock1.unlock();
+                lock2.unlock();
+            }
+        }
+
         public void secondThread() {
             for (int i = 0; i < 10000; i++) {
                 lock1.lock();
-                 lock2.lock();
+                lock2.lock();
                 Account.transfer(account2, account1, random.nextInt(100));
                 lock1.unlock();
                 lock2.unlock();
-                    }
-                }
-        public void finished(){
+            }
+        }
+
+        public void finished() {
             System.out.println(account1.getBalance());
             System.out.println(account2.getBalance());
-            System.out.println("Total : "+ (account1.getBalance()+account2.getBalance()));
+            System.out.println("Total : " + (account1.getBalance() + account2.getBalance()));
 
         }
     }
-}class Account{
-    private  int balance = 10000;
+}
 
-    public void deposit(int amount){
+class Account {
+    private int balance = 10000;
+
+    public void deposit(int amount) {
         balance += amount;
     }
-    public void withdraw(int amount){
+
+    public void withdraw(int amount) {
         balance -= amount;
     }
 
     public int getBalance() {
         return balance;
     }
-    public static void transfer(Account account1, Account account2, int amount){
-           account1.withdraw(amount);
-           account2.deposit(amount);
+
+    public static void transfer(Account account1, Account account2, int amount) {
+        account1.withdraw(amount);
+        account2.deposit(amount);
     }
 }

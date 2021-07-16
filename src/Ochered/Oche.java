@@ -15,16 +15,17 @@ public class Oche {
         Person person = new Person(1);
         Person person23 = new Person(24);
 
-         Queue<Person> personQueue = new ArrayBlockingQueue<Person>(5);
-          personQueue.offer(person2);
-          personQueue.offer(person23);
-          personQueue.offer(person45);
-          personQueue.offer(person5445);
-          personQueue.offer(person5445);
-         System.out.println(personQueue);
-          }
+        Queue<Person> personQueue = new ArrayBlockingQueue<Person>(5);
+        personQueue.offer(person2);
+        personQueue.offer(person23);
+        personQueue.offer(person45);
+        personQueue.offer(person5445);
+        personQueue.offer(person5445);
+        System.out.println(personQueue);
     }
-class Person{
+}
+
+class Person {
     private int age;
 
     @Override
